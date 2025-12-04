@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@requirement), partial: "admin/requirements/requirement", locals: { requirement: @requirement } %>
+<%= turbo_stream.update "requirement_modal", "" %>
+<%= turbo_stream.update "flash-messages", partial: "shared/flash" %>

@@ -1,0 +1,28 @@
+<%= form_with model: [:admin, requirement], class: "material-form" do |form| %>
+  <% if requirement.errors.any? %>
+    <div class="form-errors">
+      <h3><%= pluralize(requirement.errors.count, "error") %> prohibited this requirement from being saved:</h3>
+      <ul>
+        <% requirement.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, "Requirement Name", class: "form-label" %>
+    <%= form.text_field :name, class: "form-input", placeholder: "e.g. Color", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :options_csv, "Values (comma separated)", class: "form-label" %>
+    <%= form.text_area :options_csv, class: "form-input", placeholder: "e.g. Red, Blue, Green", rows: 4 %>
+    <p class="form-hint">Enter values separated by commas.</p>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit requirement.persisted? ? "Update Requirement" : "Create Requirement", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_dashboard_path(tab: 'requirements'), class: "btn btn-secondary" %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<div class="material-card design-card" id="<%= dom_id(design) %>">
+  <div class="material-info">
+    <h3 class="design-title"><%= design.material.name %></h3>
+    
+    <div class="design-specs">
+      <% design.specifications.each do |req_name, value| %>
+        <div class="spec-item">
+          <span class="spec-label"><%= req_name %></span>
+          <span class="spec-value"><%= value %></span>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="design-file">
+      <% if design.file.attached? %>
+        <%= link_to rails_blob_path(design.file, disposition: "attachment"), class: "file-link" do %>
+          <span class="file-icon">📎</span>
+          <%= design.file.filename %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="material-actions">
+      <%= button_to "Delete", admin_design_path(design), method: :delete, 
+          class: "btn btn-sm btn-danger", 
+          data: { action: "click->confirmation#confirm" } %>
+    </div>
+  </div>
+</div>

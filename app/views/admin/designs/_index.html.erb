@@ -1,0 +1,16 @@
+<div class="materials-header">
+  <h2>Design Uploads</h2>
+  <%= link_to "Upload New Design", new_admin_design_path, class: "btn btn-primary", data: { turbo_frame: "design_modal" } %>
+</div>
+
+<%= turbo_frame_tag "design_modal" %>
+
+<div class="designs-grid" id="designs_grid">
+  <% if @designs.any? %>
+    <%= render @designs %>
+  <% else %>
+    <div class="empty-state">
+      <p>No designs uploaded yet. Click "Upload New Design" to get started.</p>
+    </div>
+  <% end %>
+</div>

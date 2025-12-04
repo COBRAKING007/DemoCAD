@@ -1,0 +1,31 @@
+<div class="admin-container">
+  <h1 class="page-title">Dashboard</h1>
+
+  <div class="tabs-container" data-controller="tabs">
+    <div class="tabs-nav">
+      <button class="tab-button active" data-tab="materials" data-tabs-target="button" data-action="click->tabs#switch">Materials</button>
+      <button class="tab-button" data-tab="tab2" data-tabs-target="button" data-action="click->tabs#switch">Requirements</button>
+      <button class="tab-button" data-tab="tab3" data-tabs-target="button" data-action="click->tabs#switch">Design Uploads</button>
+    </div>
+
+    <div class="tabs-content">
+      <div id="materials-tab" class="tab-pane active" data-tabs-target="pane">
+        <%= turbo_frame_tag "materials_content" do %>
+          <%= render "admin/materials/index" %>
+        <% end %>
+      </div>
+
+      <div id="tab2-tab" class="tab-pane" data-tabs-target="pane">
+        <%= turbo_frame_tag "requirements_content" do %>
+          <%= render "admin/requirements/index" %>
+        <% end %>
+      </div>
+
+      <div id="tab3-tab" class="tab-pane" data-tabs-target="pane">
+        <%= turbo_frame_tag "designs_content" do %>
+          <%= render "admin/designs/index" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

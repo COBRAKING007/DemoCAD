@@ -1,0 +1,24 @@
+<div class="hero-section">
+  <h1>✨ Choose Your Material</h1>
+  <p>Select a premium material to start configuring your custom design.</p>
+</div>
+
+<div class="materials-grid">
+  <% @materials.each do |material| %>
+    <%= link_to configure_material_path(material), class: "material-card-link" do %>
+      <div class="material-card">
+        <div class="material-image">
+          <% if material.image.attached? %>
+            <%= image_tag material.image %>
+          <% else %>
+            <div class="placeholder-image">No Image</div>
+          <% end %>
+        </div>
+        <div class="material-info">
+          <h3><%= material.name %></h3>
+          <span class="btn-text">Configure &rarr;</span>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

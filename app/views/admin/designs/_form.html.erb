@@ -1,0 +1,38 @@
+<%= form_with model: [:admin, design], class: "material-form" do |form| %>
+  <% if design.errors.any? %>
+    <div class="form-errors">
+      <h3><%= pluralize(design.errors.count, "error") %> prohibited this design from being saved:</h3>
+      <ul>
+        <% design.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :material_id, "Select Material", class: "form-label" %>
+    <%= form.collection_select :material_id, Material.all, :id, :name, { prompt: "Choose a material..." }, { class: "form-input", required: true } %>
+  </div>
+
+  <% Requirement.all.each do |requirement| %>
+    <div class="form-group">
+      <label class="form-label"><%= requirement.name %></label>
+      <%= select_tag "design[specifications][#{requirement.name}]", 
+          options_for_select(requirement.options, (design.specifications || {})[requirement.name]), 
+          prompt: "Choose #{requirement.name}...", 
+          class: "form-input", 
+          required: true %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :file, "Design File (.stp, .step, etc)", class: "form-label" %>
+    <%= form.file_field :file, class: "form-input", required: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit "Upload Design", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_dashboard_path(tab: 'designs'), class: "btn btn-secondary" %>
+  </div>
+<% end %>

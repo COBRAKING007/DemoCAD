@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@material), partial: "admin/materials/material", locals: { material: @material } %>
+<%= turbo_stream.update "material_modal", "" %>
+<%= turbo_stream.update "flash-messages", partial: "shared/flash" %>

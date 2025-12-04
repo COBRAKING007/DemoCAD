@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin Panel</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="admin-body">
+    <%= render "shared/flash" %>
+    
+    <% if logged_in? %>
+      <header class="admin-header">
+        <div class="admin-container">
+          <h1 class="admin-logo">Admin Panel</h1>
+          <nav class="admin-nav">
+            <span class="admin-user">👤 <%= current_user.email %></span>
+            <%= button_to "Logout", admin_logout_path, method: :delete, class: "btn btn-logout" %>
+          </nav>
+        </div>
+      </header>
+    <% end %>
+
+    <main class="admin-main">
+      <%= yield %>
+    </main>
+  </body>
+</html>

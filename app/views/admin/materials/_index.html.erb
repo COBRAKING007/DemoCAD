@@ -1,0 +1,18 @@
+<div class="materials-header">
+  <h2>Materials Management</h2>
+  <%= link_to "Add New Material", new_admin_material_path, class: "btn btn-primary", data: { turbo_frame: "material_modal" } %>
+</div>
+
+<%= turbo_frame_tag "material_modal" %>
+
+<div class="materials-grid" id="materials_grid">
+  <% if @materials.any? %>
+    <%= render @materials %>
+  <% else %>
+    <div class="empty-state">
+      <p>No materials yet. Click "Add New Material" to get started.</p>
+    </div>
+  <% end %>
+</div>
+
+<%= render "admin/shared/confirmation_modal" %>

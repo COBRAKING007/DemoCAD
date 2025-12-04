@@ -1,0 +1,19 @@
+<div class="material-card" id="<%= dom_id(material) %>">
+  <div class="material-image">
+    <% if material.image.attached? %>
+      <%= image_tag material.image, alt: material.name %>
+    <% else %>
+      <div class="material-image-placeholder">No Image</div>
+    <% end %>
+  </div>
+  
+  <div class="material-info">
+    <h3 class="material-name"><%= material.name %></h3>
+    <div class="material-actions">
+      <%= link_to "Edit", edit_admin_material_path(material), class: "btn btn-sm btn-secondary", data: { turbo_frame: "material_modal" } %>
+      <%= button_to "Delete", admin_material_path(material), method: :delete, 
+          class: "btn btn-sm btn-danger", 
+          data: { action: "click->confirmation#confirm" } %>
+    </div>
+  </div>
+</div>

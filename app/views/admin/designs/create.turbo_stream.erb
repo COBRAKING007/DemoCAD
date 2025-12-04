@@ -1,0 +1,3 @@
+<%= turbo_stream.prepend "designs_grid", partial: "admin/designs/design", locals: { design: @design } %>
+<%= turbo_stream.update "design_modal", "" %>
+<%= turbo_stream.update "flash-messages", partial: "shared/flash" %>

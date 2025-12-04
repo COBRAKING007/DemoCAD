@@ -1,0 +1,18 @@
+<div class="material-card requirement-card" id="<%= dom_id(requirement) %>">
+  <div class="material-info">
+    <h3 class="material-name"><%= requirement.name %></h3>
+    
+    <div class="requirement-options">
+      <% requirement.options.each do |option| %>
+        <span class="option-tag"><%= option %></span>
+      <% end %>
+    </div>
+
+    <div class="material-actions">
+      <%= link_to "Edit", edit_admin_requirement_path(requirement), class: "btn btn-sm btn-secondary", data: { turbo_frame: "requirement_modal" } %>
+      <%= button_to "Delete", admin_requirement_path(requirement), method: :delete, 
+          class: "btn btn-sm btn-danger", 
+          data: { action: "click->confirmation#confirm" } %>
+    </div>
+  </div>
+</div>

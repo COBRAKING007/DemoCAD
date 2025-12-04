@@ -1,0 +1,37 @@
+<div class="configure-container">
+  <div class="configure-header">
+    <%= link_to "← Back to Materials", root_path, class: "back-link" %>
+    <h1>🎨 Configure <%= @material.name %></h1>
+  </div>
+
+  <div class="configure-layout">
+    <div class="material-preview">
+      <% if @material.image.attached? %>
+        <%= image_tag @material.image, class: "preview-image" %>
+      <% end %>
+      <div class="material-details">
+        <h3><%= @material.name %></h3>
+        <p>✨ Customize your design by selecting your preferred requirements below.</p>
+      </div>
+    </div>
+
+    <div class="requirements-form-container">
+      <%= form_with url: view_design_path(@material), method: :get, class: "requirements-form", local: true do |form| %>
+        <% @requirements.each do |requirement| %>
+          <div class="form-group">
+            <label class="form-label"><%= requirement.name %></label>
+            <%= select_tag "specifications[#{requirement.name}]", 
+                options_for_select(requirement.options), 
+                prompt: "Select #{requirement.name}...", 
+                class: "form-select", 
+                required: true %>
+          </div>
+        <% end %>
+
+        <div class="form-actions">
+          <%= form.submit "🚀 View Design", class: "btn btn-primary btn-block" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

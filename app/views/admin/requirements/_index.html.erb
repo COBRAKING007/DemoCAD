@@ -1,0 +1,16 @@
+<div class="materials-header">
+  <h2>Requirements Management</h2>
+  <%= link_to "Add New Requirement", new_admin_requirement_path, class: "btn btn-primary", data: { turbo_frame: "requirement_modal" } %>
+</div>
+
+<%= turbo_frame_tag "requirement_modal" %>
+
+<div class="requirements-grid" id="requirements_grid">
+  <% if @requirements.any? %>
+    <%= render @requirements %>
+  <% else %>
+    <div class="empty-state">
+      <p>No requirements yet. Click "Add New Requirement" to get started.</p>
+    </div>
+  <% end %>
+</div>

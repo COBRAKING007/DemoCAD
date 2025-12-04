@@ -1,0 +1,66 @@
+<div class="viewer-layout">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <%= link_to "← Back", configure_material_path(@material), class: "back-link" %>
+      <h2>📐 Design Details</h2>
+    </div>
+
+    <div class="design-info">
+      <div class="info-group">
+        <label>Material</label>
+        <div class="value"><%= @material.name %></div>
+      </div>
+
+      <% @specifications.each do |key, value| %>
+        <div class="info-group">
+          <label><%= key %></label>
+          <div class="value"><%= value %></div>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @design&.file&.attached? %>
+      <div class="design-actions">
+        <button id="reset-view-btn" class="btn btn-secondary btn-block" style="margin-top: 0.75rem;">
+          🔄 Reset View
+        </button>
+      </div>
+    <% else %>
+      <div class="alert alert-warning">
+        No design found for this configuration. Please contact support or try a different combination.
+      </div>
+    <% end %>
+  </div>
+
+  <div class="main-viewer" data-controller="viewer">
+    <% if @design&.file&.attached? %>
+      <div id="3d-canvas-container" class="canvas-container">
+        <!-- Three.js canvas will be injected here -->
+        <div class="loading-overlay" data-viewer-target="loading">
+          <div class="loader">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading STEP file...</div>
+            <div class="loading-subtext">Initializing 3D viewer, this may take a moment...</div>
+            <div class="loading-hint" style="margin-top: 20px; font-size: 11px; opacity: 0.5;">
+              If loading takes too long, check browser console (F12)
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="viewer-info">
+        <div class="info-item">🖱️ Left click + drag: Rotate</div>
+        <div class="info-item">🖱️ Right click + drag: Pan</div>
+        <div class="info-item">🔍 Scroll wheel: Zoom</div>
+      </div>
+      
+      <!-- Hidden input for viewer to grab the URL -->
+      <input type="hidden" id="design-url" value="<%= rails_blob_url(@design.file) %>">
+    <% else %>
+      <div class="empty-viewer">
+        <div class="empty-icon">📦</div>
+        <p>No design found for this configuration.</p>
+        <p class="empty-hint">Please try a different combination of requirements.</p>
+      </div>
+    <% end %>
+  </div>
+</div>

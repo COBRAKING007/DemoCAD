@@ -1,0 +1,14 @@
+<%= turbo_frame_tag "requirement_modal" do %>
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Add New Requirement</h2>
+        <%= link_to "×", admin_dashboard_path(tab: 'requirements'), class: "modal-close" %>
+      </div>
+      
+      <div class="modal-body">
+        <%= render "form", requirement: @requirement %>
+      </div>
+    </div>
+  </div>
+<% end %>

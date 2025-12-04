@@ -1,0 +1,11 @@
+<div id="flash-messages" class="flash-container">
+  <% flash.each do |type, message| %>
+    <div class="flash-message flash-<%= type == "notice" ? "success" : "error" %>" data-controller="flash" data-flash-auto-dismiss-value="true">
+      <div class="flash-content">
+        <span class="flash-icon"><%= type == "notice" ? "✓" : "⚠" %></span>
+        <span class="flash-text"><%= message %></span>
+      </div>
+      <button class="flash-close" data-action="click->flash#dismiss">&times;</button>
+    </div>
+  <% end %>
+</div>
