@@ -38,9 +38,6 @@
 # Ignore Kamal secrets
 /.kamal/secrets
 
-# Ignore database configuration
-/config/database.yml
-
 # Ignore credentials
 /config/credentials/*.key
 
