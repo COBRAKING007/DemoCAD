@@ -85,23 +85,21 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
-  # Uncomment below if using multiple databases
-  # primary: &primary_production
-  #   <<: *default
-  #   database: spinning_glenn_production
-  #   username: spinning_glenn
-  #   password: <%= ENV["SPINNING_GLENN_DATABASE_PASSWORD"] %>
-  # cache:
-  #   <<: *primary_production
-  #   database: spinning_glenn_production_cache
-  #   migrations_paths: db/cache_migrate
-  # queue:
-  #   <<: *primary_production
-  #   database: spinning_glenn_production_queue
-  #   migrations_paths: db/queue_migrate
+  primary:
+    <<: *default
+    url: <%= ENV.fetch("DATABASE_URL") { "postgresql://localhost/spinning_glenn_production" } %>
+  cache:
+    <<: *default
+    url: <%= ENV.fetch("DATABASE_URL") { "postgresql://localhost/spinning_glenn_production" } %>
+    database_tasks: false
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *default
+    url: <%= ENV.fetch("DATABASE_URL") { "postgresql://localhost/spinning_glenn_production" } %>
+    database_tasks: false
+    migrations_paths: db/queue_migrate
   cable:
-    <<: *primary_production
-    database: spinning_glenn_production_cable
+    <<: *default
+    url: <%= ENV.fetch("DATABASE_URL") { "postgresql://localhost/spinning_glenn_production" } %>
+    database_tasks: false
     migrations_paths: db/cable_migrate
